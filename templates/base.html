@@ -1,9 +1,27 @@
 <!DOCTYPE html>
+<style>
+    h4{
+        display: inline-block;
+    }
+    ul li{
+        display: inline-block;
+    }
+    nav #user_acct{
+        float: right;
+    }
+</style>
 <html>
 <header>
-    <title>Build-A-Blog</title>
-    <a href="/blog">Main Blog Page</a>
-    <a href="/newpost">Add A New Blog Post</a>
+    <title>Home Page</title>
+    <a href="/"><h4>Home</h4></a>
+    <a href="/blog"><h4>all posts</h4></a>
+    <a href="/newpost"><h4>newpost</h4></a>
+    <nav>
+        <ul id="user_acct">
+            <li><a href="/login">Login</li></a>
+            <li><a href="/logout">Logout</li></a>
+        </ul>
+    </nav>
 </header>
 <body>
     {% block content %}

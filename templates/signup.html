@@ -1,0 +1,34 @@
+<!--signup.html for blogz-->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>REGISTER TO CREATE YOU OWN BLOG PAGE!</h1>
+<!--<p>If you don't have an account, you may <a href="/register">register</a> for one</p>-->
+<form action="/signup" method="post">
+    <table>
+        <tr>
+            <td><label for="username">USERNAME</label></td>
+            <td>
+                <input name="username" type="text" value="{{ username }}" />
+				<span>{{username_error}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="password">Password</label></td>
+            <td>
+                <input name="password" type="password" />
+				<span>{{password_error}}</span>
+            </td>
+        </tr>
+		<tr>
+            <td><label for="verify_password">Verify Password</label></td>
+            <td>
+                <input name="verify_password" type="password">
+				<span>{{veri_password_error}}</span>
+            </td>
+        </tr>
+    </table>
+    
+	<input type="submit" value="CREATE ACCOUNT" />
+</form>
+{% endblock %}
