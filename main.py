@@ -51,7 +51,17 @@ def space_validation(name3):
 @app.route('/', methods=['POST','GET'])
 def index():
     user_id=User.query.all()
-    return render_template('index.html',user=user_id)
+    return render_template('index.html',users=user_id)
+
+@app.route('/single_user', methods=['POST','GET'])
+def single_user():
+    if request.method=='GET':
+        if request.args:
+            user_id=request.args.get("id")
+            blogs=Blog.query.filter_by(owner_id=user_id).all()
+            return render_template("main_blog_page.html",blogs=blogs)
+    return render_template("main_blog_page.html")
+
 
 @app.before_request
 def require_login():
@@ -150,8 +160,8 @@ def logout():
 @app.route('/blog', methods=['POST','GET'])
 def blog_page():
 #need to add validation to get the blogs just for that user
-    owner=User.query.filter_by(username=session['username']).first()
-    owner_id=owner.id
+    #owner=User.query.filter_by(username=session['username']).first()
+    #owner_id=owner.id
     if request.method=='GET':
         if request.args:
             blog_id = request.args.get("id")

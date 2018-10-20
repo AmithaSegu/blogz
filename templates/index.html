@@ -1,31 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 
-
-<!--<header>-->
-    <!--<title>Home Page</title>-->
-    <!--<a href="/"><h6>Home</h6></a>-->
-    <!--<a href="/blog"><h6>all posts</h6></a>-->
-    <!--<a href="/newpost"><h6>newpost</h6></a>-->
-    <!--<nav>-->
-        <!--<ul id="user_acct">-->
-            <!--<li><a href="/login">Login</li></a>-->
-            <!--<li><a href="/logout">Logout</li></a>-->
-        <!--</ul>-->
-    <!--</nav>-->
-<!--</header>-->
-
 <hr />
 <form method='POST'>
     <body>
         <h4 style="text-align:center">All USERS</h4>
-        {% if user|length == 0 %}
+        {% if users|length == 0 %}
             <p>NO Users</p>
         {% else %}
             {% for user in users %}
                 <ul>
                 
-                    <li><a href="/blog?id={{user.id}}">{{user.username}}</a></li>
+                    <a href="/single_user?id={{user.id}}"><li>{{user.username}}</li></a>
              
                 </ul>
             {% endfor %}      

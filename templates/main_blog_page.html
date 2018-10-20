@@ -7,14 +7,14 @@
     
     <hr />
         <h1> NEW POSTS</h1>
-        {% if blog|length == 0 %}
+        {% if blogs|length == 0 %}
             <p>NO blogs</p>
         {% else %}
             {% for blog in blogs %}
                 <ul>
                 
-                <li><a href="/main_blog_page?id={{blog.id}}">{{blog.title}}</a></li>
-                <p>{{blog.detail}}</p>
+                    <li><a href="/blog?id={{blog.id}}">{{blog.title}}</a></li>
+                    <p>{{blog.detail}}</p>
                 
                 </ul>
             {% endfor %}      
