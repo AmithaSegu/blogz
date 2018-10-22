@@ -15,7 +15,7 @@
                 
                     <li><a href="/blog?id={{blog.id}}">{{blog.title}}</a></li>
                     <p>{{blog.detail}}</p>
-                
+                    <em><p>written by:<a  href="/single_user?id={{blog.ownerid.username}}">{{blog.ownerid.username}}</a></p></em>
                 </ul>
             {% endfor %}      
         {% endif %}

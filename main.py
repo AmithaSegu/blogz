@@ -57,15 +57,16 @@ def index():
 def single_user():
     if request.method=='GET':
         if request.args:
-            user_id=request.args.get("id")
-            blogs=Blog.query.filter_by(owner_id=user_id).all()
+            user_name=request.args.get("id")
+            user_id=User.query.filter_by(username=user_name).first()
+            blogs=Blog.query.filter_by(owner_id=user_id.id).all()
             return render_template("main_blog_page.html",blogs=blogs)
     return render_template("main_blog_page.html")
 
 
 @app.before_request
 def require_login():
-    allowed_routes = ['login', 'signup']
+    allowed_routes = ['login', 'signup','index','blog_page','single_user']
     if request.endpoint not in allowed_routes and 'username' not in session:
         return redirect('/login')
 
@@ -163,16 +164,10 @@ def logout():
 	
 @app.route('/blog', methods=['POST','GET'])
 def blog_page():
-#need to add validation to get the blogs just for that user
-    #owner=User.query.filter_by(username=session['username']).first()
-    #owner_id=owner.id
     if request.method=='GET':
         if request.args:
             blog_id = request.args.get("id")
             blog = Blog.query.get(blog_id)
-            #titles=blog.title
-            #details=blog.detail
-            #return render_template('blog_page.html',details=details,titles=titles)        
             return render_template('blog_page.html',blog=blog)        
     blogs= Blog.query.all()
     return render_template('main_blog_page.html',blogs=blogs)        
@@ -182,7 +177,7 @@ def new_blog_page():
     title_error=""
     detail_error=""
 
-    owner_id = User.query.filter_by(username=session['username']).first()
+    #owner_id = User.query.filter_by(username=session['username']).first()
     if request.method=='GET':
         return render_template('new_post_page.html')
 
