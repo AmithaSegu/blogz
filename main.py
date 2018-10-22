@@ -78,20 +78,24 @@ def login():
     if request.method=='POST':
         username=request.form['username']
         password=request.form['password']
-        user= User.query.filter_by(username=username).first()
-        if user=="":
-            flash("USER IS NOT REGISTERED OR ENTERED INCORRECT USERNAME")
-            #return redirect('/login')
+        if username=="" and password=="":
+            flash("Please enter valid username and password")
             return render_template('login.html')
-        if user and user.password != password:
-            flash("PASSWORD IS INCORRECT")
+        else:
+            user= User.query.filter_by(username=username).first()
+            if user==None:
+                flash("USER IS NOT REGISTERED OR ENTERED INCORRECT USERNAME")
             #return redirect('/login')
-            return render_template('login.html')
-        if user and user.password == password:
-            session['username']=username
-            flash("LOGGED IN")
+                return render_template('login.html')
+            if user and user.password != password:
+                flash("PASSWORD IS INCORRECT")
+            #return redirect('/login')
+                return render_template('login.html')
+            if user and user.password == password:
+                session['username']=username
+                flash("LOGGED IN")
             #return redirect('/newpost')
-            return render_template('new_post_page.html')
+                return render_template('new_post_page.html')
     else:				
         return render_template('login.html')
 
@@ -178,7 +182,7 @@ def new_blog_page():
     title_error=""
     detail_error=""
 
-    # owner_id = User.query.filter_by(username=session['username']).first()
+    owner_id = User.query.filter_by(username=session['username']).first()
     if request.method=='GET':
         return render_template('new_post_page.html')
 
